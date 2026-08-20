@@ -25,4 +25,15 @@
       <li class="empty">No tasks yet — add one above.</li>
     }
   </ul>
+
+  @if (taskService.tasks().length > 0) {
+    <div class="footer">
+      <span>{{ taskService.tasks().length }} tasks</span>
+      <button (click)="taskService.clearCompleted()">Clear completed</button>
+    </div>
+  }
+
+  @if (taskService.error(); as error) {
+    <div class="error">{{ error }}</div>
+  }
 </div>
