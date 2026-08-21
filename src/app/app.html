@@ -24,7 +24,7 @@
           [checked]="task.done"
           (change)="taskService.toggleDone(task)"
         />
-        <span>{{ task.title }}</span>
+        <a [routerLink]="['/tasks', task.id]">{{ task.title }}</a>
         <button class="delete" (click)="taskService.deleteTask(task.id)">✕</button>
       </li>
     } @empty {
@@ -42,4 +42,6 @@
   @if (taskService.error(); as error) {
     <div class="error">{{ error }}</div>
   }
+
+  <router-outlet></router-outlet>
 </div>

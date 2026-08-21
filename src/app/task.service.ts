@@ -70,7 +70,7 @@ export class TaskService {
     });
   }
 
-  deleteTask(id: number) {
+  deleteTask(id: string) {
     this.http.delete(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
         this.error.set('Failed to delete task');

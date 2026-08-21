@@ -1,0 +1,40 @@
+.detail {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.detail h2 {
+  margin: 0 0 12px;
+}
+
+.detail p {
+  margin: 0 0 20px;
+  color: #666;
+}
+
+.detail a {
+  color: #333;
+  text-decoration: none;
+}
+
+.detail a:hover {
+  text-decoration: underline;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.status.done {
+  color: #2e7d32;
+}
+
+.not-found {
+  margin-top: 30px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
