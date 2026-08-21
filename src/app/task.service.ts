@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { Task } from './task.model';
@@ -11,6 +11,19 @@ export class TaskService {
 
   error = signal<string | null>(null);
   tasks = signal<Task[]>([]);
+  filter = signal<'all' | 'active' | 'completed'>('all');
+
+  filteredTasks = computed(() => {
+    const currentFilter = this.filter();
+    const allTasks = this.tasks();
+
+    if (currentFilter === 'active') return allTasks.filter((task) => !task.done);
+    if (currentFilter === 'completed') return allTasks.filter((task) => task.done);
+    return allTasks;
+  });
+
+  activeCount = computed(() => this.tasks().filter((task) => !task.done).length);
+  completedCount = computed(() => this.tasks().filter((task) => task.done).length);
 
   constructor(private http: HttpClient) {
     this.loadTasks();

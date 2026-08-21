@@ -10,8 +10,14 @@
     <button (click)="onAddTask()">Add</button>
   </div>
 
+  <div class="filters">
+    <button (click)="taskService.filter.set('all')">All ({{ taskService.tasks().length }})</button>
+    <button (click)="taskService.filter.set('active')">Active ({{ taskService.activeCount() }})</button>
+    <button (click)="taskService.filter.set('completed')">Completed ({{ taskService.completedCount() }})</button>
+  </div>
+
   <ul class="task-list">
-    @for (task of taskService.tasks(); track task.id) {
+    @for (task of taskService.filteredTasks(); track task.id) {
       <li [class.done]="task.done">
         <input
           type="checkbox"
