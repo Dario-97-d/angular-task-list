@@ -17,15 +17,15 @@
   </div>
 
   <ul class="task-list">
-    @for (task of taskService.filteredTasks(); track task.id) {
+    @for (task of taskService.filteredTasks(); track task._id) {
       <li [class.done]="task.done">
         <input
           type="checkbox"
           [checked]="task.done"
           (change)="taskService.toggleDone(task)"
         />
-        <a [routerLink]="['/tasks', task.id]">{{ task.title }}</a>
-        <button class="delete" (click)="taskService.deleteTask(task.id)">✕</button>
+        <a [routerLink]="['/tasks', task._id]">{{ task.title }}</a>
+        <button class="delete" (click)="taskService.deleteTask(task._id)">✕</button>
       </li>
     } @empty {
       <li class="empty">No tasks yet — add one above.</li>

@@ -14,5 +14,5 @@ export class TaskDetail {
   private taskService = inject(TaskService);
 
   taskId = this.route.snapshot.paramMap.get('id')!;
-  task = this.taskService.tasks().find((t) => t.id === this.taskId);
+  task = this.taskService.tasks().find((t) => t._id === this.taskId);
 }
