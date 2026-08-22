@@ -10,12 +10,6 @@ import { environment } from '../environments/environment';
 export class TaskService {
   private apiUrl = environment.apiUrl;
 
-  private headers = new HttpHeaders({
-    'x-apikey': environment.apiKey,
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache',
-  });
-
   error = signal<string | null>(null);
   tasks = signal<Task[]>([]);
   filter = signal<'all' | 'active' | 'completed'>('all');
@@ -37,7 +31,7 @@ export class TaskService {
   }
 
   loadTasks() {
-    this.http.get<Task[]>(this.apiUrl, { headers: this.headers }).pipe(
+    this.http.get<Task[]>(this.apiUrl).pipe(
       catchError((error) => {
         this.error.set('Failed to load tasks');
         return of([]);
@@ -49,7 +43,7 @@ export class TaskService {
 
   addTask(title: string) {
     const newTask = { title, done: false };
-    this.http.post<Task>(this.apiUrl, newTask, { headers: this.headers }).pipe(
+    this.http.post<Task>(this.apiUrl, newTask).pipe(
       catchError((error) => {
         this.error.set('Failed to add task');
         return of(null);
@@ -63,7 +57,7 @@ export class TaskService {
 
   toggleDone(task: Task) {
     const updatedTask = { ...task, done: !task.done };
-    this.http.put<Task>(`${this.apiUrl}/${task._id}`, updatedTask, { headers: this.headers }).pipe(
+    this.http.put<Task>(`${this.apiUrl}/${task._id}`, updatedTask).pipe(
       catchError((error) => {
         this.error.set('Failed to update task');
         return of(null);
@@ -78,7 +72,7 @@ export class TaskService {
   }
 
   deleteTask(id: string) {
-    this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers }).pipe(
+    this.http.delete(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
         this.error.set('Failed to delete task');
         return of(null);

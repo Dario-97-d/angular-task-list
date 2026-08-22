@@ -1,0 +1,4 @@
+   [build]
+     command = "ng build"
+     publish = "dist/task-list/browser"
+     functions = "netlify/functions"
