@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
-  const apiUrl = process.env.RESTDB_API_URL;
-  const apiKey = process.env.RESTDB_API_KEY;
+  const apiUrl = process.env.API_URL;
+  const apiKey = process.env.API_KEY;
 
   const restdbPath = event.path.replace('/.netlify/functions/tasks', '');
   const url = `${apiUrl}${restdbPath}`;

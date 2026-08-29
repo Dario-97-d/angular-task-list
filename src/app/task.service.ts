@@ -34,6 +34,7 @@ export class TaskService {
     this.http.get<Task[]>(this.apiUrl).pipe(
       catchError((error) => {
         this.error.set('Failed to load tasks');
+        console.log('Error loading tasks:', error.message);
         return of([]);
       })
     ).subscribe((data) => {
