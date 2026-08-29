@@ -1,14 +1,22 @@
 <div class="container">
   <h1>My Tasks</h1>
 
-  <div class="add-row">
-    <input
-      [(ngModel)]="newTaskTitle"
-      (keyup.enter)="onAddTask()"
-      placeholder="What needs doing?"
-    />
-    <button (click)="onAddTask()">Add</button>
-  </div>
+  <form [formGroup]="taskForm" (ngSubmit)="onAddTask()" class="add-row">
+    <div class="input-wrapper">
+      <input formControlName="title" placeholder="What needs doing?" />
+      @if (taskForm.get('title')?.invalid && taskForm.get('title')?.touched) {
+        <small class="error">
+          @if (taskForm.get('title')?.errors?.['required']) {
+            Title is required.
+          }
+          @if (taskForm.get('title')?.errors?.['minlength']) {
+            Title must be at least 3 characters.
+          }
+        </small>
+      }
+    </div>
+    <button type="submit">Add</button>
+  </form>
 
   <div class="filters">
     <button (click)="taskService.filter.set('all')">All ({{ taskService.tasks().length }})</button>

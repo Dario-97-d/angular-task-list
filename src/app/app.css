@@ -51,3 +51,15 @@
   color: #999;
   font-style: italic;
 }
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.error {
+  color: #c00;
+  font-size: 12px;
+  margin-top: 2px;
+}

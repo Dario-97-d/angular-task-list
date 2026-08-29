@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TaskService } from './task.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, RouterLink, RouterOutlet],
+  imports: [ReactiveFormsModule, RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  newTaskTitle = '';
+  taskForm = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(3)])
+  })
 
   constructor(public taskService: TaskService) {}
 
   onAddTask() {
-    const title = this.newTaskTitle.trim();
-    if (!title) return;
+    if (this.taskForm.invalid) {
+      this.taskForm.markAllAsTouched();
+      return;
+    }
+    const title = this.taskForm.value.title!.trim();
     this.taskService.addTask(title);
-    this.newTaskTitle = '';
+    this.taskForm.reset();
   }
 }
