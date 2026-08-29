@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TaskService } from './task.service';
 
-describe('Task', () => {
+describe('TaskService', () => {
   let service: TaskService;
 
   beforeEach(() => {
