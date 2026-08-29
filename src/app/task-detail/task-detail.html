@@ -1,10 +1,10 @@
 @if (task) {
   <div class="detail">
-    <h2>{{ task.title }}</h2>
-
     <p class="status" [class.done]="task.done">
       {{ task.done ? 'Completed' : 'Active' }}
     </p>
+
+    <h2>{{ task.title }}</h2>
 
     <a routerLink="/">← Back to list</a>
   </div>
